@@ -20,6 +20,8 @@ export class AppComponent {
 
   fullScreen(flag: boolean) {
     this._electronService.ipcRenderer.send('full-screen', flag)
+    let main = this._electronService.remote.require('./main')
+    console.log(main)
   }
 
   testData: any;

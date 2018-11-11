@@ -3,21 +3,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
 var path = require("path");
 var url = require("url");
-var win, serve;
-var args = process.argv.slice(1);
-serve = args.some(function (val) { return val === '--serve'; });
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+var win;
+var args = process.argv.slice(1);
+var serve = args.some(function (val) { return val === '--serve'; });
 function createWindow() {
-    var electronScreen = electron_1.screen;
-    var size = electronScreen.getPrimaryDisplay().workAreaSize;
-    // Create the browser window.
-    win = new electron_1.BrowserWindow({
-        x: 0,
-        y: 0,
-        width: size.width,
-        height: size.height,
-    });
-    win.maximize();
+    var size = electron_1.screen.getPrimaryDisplay().workAreaSize;
+    var browserOptions = {
+        x: size.width * 0.1,
+        y: size.height * 0.05,
+        width: size.width * 0.8,
+        height: size.height * 0.9,
+    };
+    win = new electron_1.BrowserWindow(browserOptions);
+    win.setMenu(null);
     if (serve) {
         require('electron-reload')(__dirname, {
             electron: require(__dirname + "/node_modules/electron")
@@ -31,8 +30,6 @@ function createWindow() {
             slashes: true
         }));
     }
-    // win.webContents.openDevTools();
-    // Emitted when the window is closed.
     win.on('closed', function () {
         // Dereference the window object, usually you would store window
         // in an array if your app supports multi windows, this is the time
@@ -62,10 +59,12 @@ try {
     });
 }
 catch (e) {
-    // Catch Error
-    // throw e;
+    throw e;
 }
 electron_1.ipcMain.on('full-screen', function (event, arg) {
     win.setFullScreen(arg);
+});
+electron_1.ipcMain.on('progress', function (event, args) {
+    win.setProgressBar(args);
 });
 //# sourceMappingURL=main.js.map

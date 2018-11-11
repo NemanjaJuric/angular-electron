@@ -1,27 +1,26 @@
-import { app, BrowserWindow, screen, ipcMain } from 'electron';
+import { app, BrowserWindow, screen, ipcMain, BrowserWindowConstructorOptions, systemPreferences } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
-let win, serve;
-const args = process.argv.slice(1);
-serve = args.some(val => val === '--serve');
-
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+
+let win;
+let args = process.argv.slice(1);
+let serve = args.some(val => val === '--serve');
 
 function createWindow() {
 
-  const electronScreen = screen;
-  const size = electronScreen.getPrimaryDisplay().workAreaSize;
+  let size = screen.getPrimaryDisplay().workAreaSize;
 
-  // Create the browser window.
-  win = new BrowserWindow({
-    x: 0,
-    y: 0,
-    width: size.width,
-    height: size.height,
-  });
+  let browserOptions: BrowserWindowConstructorOptions = {
+    x: size.width * 0.1,
+    y: size.height * 0.05,
+    width: size.width * 0.8,
+    height: size.height * 0.9,
+  }
 
-  win.maximize();
+  win = new BrowserWindow(browserOptions);
+  win.setMenu(null);
 
   if (serve) {
     require('electron-reload')(__dirname, {
@@ -36,9 +35,6 @@ function createWindow() {
     }));
   }
 
-  // win.webContents.openDevTools();
-
-  // Emitted when the window is closed.
   win.on('closed', () => {
     // Dereference the window object, usually you would store window
     // in an array if your app supports multi windows, this is the time
@@ -72,11 +68,15 @@ try {
     }
   });
 
-} catch (e) {
-  // Catch Error
-  // throw e;
+}
+catch (e) {
+  throw e;
 }
 
 ipcMain.on('full-screen', (event, arg) => {
   win.setFullScreen(arg)
+})
+
+ipcMain.on('progress', (event, args) => {
+  win.setProgressBar(args)
 })
