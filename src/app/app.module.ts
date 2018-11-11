@@ -11,11 +11,13 @@ import { LocalStorageService } from './services/local-storage.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { WebviewDirective } from './directives/webview.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ElectronViewDirective
+    ElectronViewDirective,
+    WebviewDirective
   ],
   imports: [
     BrowserModule,

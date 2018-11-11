@@ -6,6 +6,8 @@ let win, serve;
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
 
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+
 function createWindow() {
 
   const electronScreen = screen;
@@ -15,9 +17,11 @@ function createWindow() {
   win = new BrowserWindow({
     x: 0,
     y: 0,
-    width: size.width - 400,
-    height: size.height - 100,
+    width: size.width,
+    height: size.height,
   });
+
+  win.maximize();
 
   if (serve) {
     require('electron-reload')(__dirname, {
@@ -32,7 +36,7 @@ function createWindow() {
     }));
   }
 
-//   win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   // Emitted when the window is closed.
   win.on('closed', () => {

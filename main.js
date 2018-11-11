@@ -6,6 +6,7 @@ var url = require("url");
 var win, serve;
 var args = process.argv.slice(1);
 serve = args.some(function (val) { return val === '--serve'; });
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 function createWindow() {
     var electronScreen = electron_1.screen;
     var size = electronScreen.getPrimaryDisplay().workAreaSize;
@@ -13,9 +14,10 @@ function createWindow() {
     win = new electron_1.BrowserWindow({
         x: 0,
         y: 0,
-        width: size.width - 400,
-        height: size.height - 100,
+        width: size.width,
+        height: size.height,
     });
+    win.maximize();
     if (serve) {
         require('electron-reload')(__dirname, {
             electron: require(__dirname + "/node_modules/electron")
@@ -29,7 +31,7 @@ function createWindow() {
             slashes: true
         }));
     }
-    //   win.webContents.openDevTools();
+    // win.webContents.openDevTools();
     // Emitted when the window is closed.
     win.on('closed', function () {
         // Dereference the window object, usually you would store window
