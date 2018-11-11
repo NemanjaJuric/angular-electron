@@ -28,9 +28,14 @@
               "src/favicon.icns",
               "src/favicon.256x256.png",
               "src/favicon.512x512.png",
-              "src/assets"
+              "src/assets",
+              "src/manifest.json",
+              "src/manifest.json",
+              "src/manifest.json"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap-reboot.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -58,7 +63,8 @@
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
                 }
-              ]
+              ],
+              "serviceWorker": true
             }
           }
         },
@@ -92,7 +98,10 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.json",
+              "src/manifest.json",
+              "src/manifest.json"
             ]
           }
         },
