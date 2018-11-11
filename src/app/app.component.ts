@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { ElectronService } from './services/electron.service';
 import { WebApiService } from './services/web-api.service';
 import { LocalStorageService } from './services/local-storage.service';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 
@@ -15,6 +15,8 @@ export class AppComponent {
     private _webApiService: WebApiService,
     private _localStorageService: LocalStorageService
   ) { }
+
+  faCoffee = faCoffee;
 
   fullScreen(flag: boolean) {
     this._electronService.ipcRenderer.send('full-screen', flag)
