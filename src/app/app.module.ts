@@ -3,16 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ElectronService } from './services/electron.service';
+import { ElectronViewDirective } from './directives/electron-view.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ElectronViewDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    ElectronService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

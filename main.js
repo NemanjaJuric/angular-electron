@@ -63,4 +63,7 @@ catch (e) {
     // Catch Error
     // throw e;
 }
+electron_1.ipcMain.on('full-screen', function (event, arg) {
+    win.setFullScreen(arg);
+});
 //# sourceMappingURL=main.js.map
