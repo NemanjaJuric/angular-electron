@@ -14,6 +14,9 @@ function createWindow() {
         y: size.height * 0.05,
         width: size.width * 0.8,
         height: size.height * 0.9,
+        webPreferences: {
+            webSecurity: false
+        }
     };
     win = new electron_1.BrowserWindow(browserOptions);
     win.maximize();
@@ -37,17 +40,11 @@ function createWindow() {
         win = null;
     });
 }
-function setAppUserModelId() {
-    var exeName = path.basename(process.execPath).replace(/\.exe$/i, '');
-    var appUserModelId = exeName;
-    electron_1.app.setAppUserModelId(appUserModelId);
-}
 try {
     // This method will be called when Electron has finished
     // initialization and is ready to create browser windows.
     // Some APIs can only be used after this event occurs.
     electron_1.app.on('ready', function () {
-        setAppUserModelId();
         createWindow();
     });
     // Quit when all windows are closed.

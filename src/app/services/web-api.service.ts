@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 @Injectable({
@@ -12,8 +12,8 @@ export class WebApiService {
     private _http: HttpClient
   ) { }
 
-  get(url: string, params?: HttpParams) {
-    return this._http.get(url, { params: params })
+  get(url: string, params?: HttpParams, responseType: any = 'json') {
+    return this._http.get(url, {params: params, responseType: responseType})
       .pipe(
         catchError(this.handleError)
       );

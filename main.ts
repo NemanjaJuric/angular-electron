@@ -1,7 +1,6 @@
 import { app, BrowserWindow, screen, ipcMain, BrowserWindowConstructorOptions, Notification } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
-import { notifier } from "node-notifier";
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
@@ -18,6 +17,9 @@ function createWindow() {
     y: size.height * 0.05,
     width: size.width * 0.8,
     height: size.height * 0.9,
+    webPreferences: {
+      webSecurity: false
+    }
   }
 
   win = new BrowserWindow(browserOptions);
