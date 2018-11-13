@@ -3,6 +3,7 @@ import { ElectronService } from './services/electron.service';
 import { WebApiService } from './services/web-api.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { Notification } from 'electron';
 
 @Component({
   selector: 'app-root',

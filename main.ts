@@ -1,6 +1,7 @@
-import { app, BrowserWindow, screen, ipcMain, BrowserWindowConstructorOptions, systemPreferences } from 'electron';
+import { app, BrowserWindow, screen, ipcMain, BrowserWindowConstructorOptions, Notification } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+import { notifier } from "node-notifier";
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
@@ -20,7 +21,7 @@ function createWindow() {
   }
 
   win = new BrowserWindow(browserOptions);
-  win.setMenu(null);
+  win.maximize();
 
   if (serve) {
     require('electron-reload')(__dirname, {
@@ -44,12 +45,21 @@ function createWindow() {
 
 }
 
+function setAppUserModelId() {
+  let exeName = path.basename(process.execPath).replace(/\.exe$/i, '');
+  let appUserModelId = exeName;
+  app.setAppUserModelId(appUserModelId);
+}
+
 try {
 
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
-  app.on('ready', createWindow);
+  app.on('ready', () => {
+    setAppUserModelId()
+    createWindow();
+  });
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
