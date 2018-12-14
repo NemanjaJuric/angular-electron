@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ElectronService } from './services/electron.service';
 import { WebApiService } from './services/web-api.service';
 import { LocalStorageService } from './services/local-storage.service';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faTimes, faWindowMaximize, faWindowMinimize } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +17,29 @@ export class AppComponent {
   ) { }
 
   faCoffee = faCoffee;
+  faTimes = faTimes;
+  faWindowMaximize = faWindowMaximize;
+  faWindowMinimize = faWindowMinimize;
+
+  fullScreenInd: boolean = false;
 
   fullScreen(flag: boolean) {
     this._electronService.ipcRenderer.send('full-screen', flag)
     let main = this._electronService.remote.require('./main')
     console.log(main)
+  }
+
+  toggle(){
+    this.fullScreenInd = !this.fullScreenInd;
+    this._electronService.ipcRenderer.send('toggle', this.fullScreenInd)
+  }
+
+  minimize(){
+    this._electronService.ipcRenderer.send('minimize');
+  }
+
+  close(){
+    this._electronService.ipcRenderer.send('close');
   }
 
   testData: any;

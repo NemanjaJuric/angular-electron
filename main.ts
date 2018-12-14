@@ -17,10 +17,12 @@ function createWindow() {
     y: size.height * 0.05,
     width: size.width * 0.8,
     height: size.height * 0.9,
+    transparent: true,
+    frame: false,
   }
 
   win = new BrowserWindow(browserOptions);
-  win.setMenu(null);
+  // win.setMenu(null); // for production
 
   if (serve) {
     require('electron-reload')(__dirname, {
@@ -75,6 +77,22 @@ catch (e) {
 
 ipcMain.on('full-screen', (event, arg) => {
   win.setFullScreen(arg)
+})
+
+ipcMain.on('toggle', (event, arg) => {
+  if(arg){
+    win.maximize();
+  }else{
+    win.unmaximize();
+  }
+})
+
+ipcMain.on('minimize', (event, arg) => {
+  win.minimize();
+})
+
+ipcMain.on('close', (event, arg) => {
+  win.close();
 })
 
 ipcMain.on('progress', (event, args) => {

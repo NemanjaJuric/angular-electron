@@ -1,12 +1,52 @@
-<router-outlet></router-outlet>
-<button class="btn btn-primary m-2" electronView (click)="fullScreen(true)">Full Screen</button>
-<button class="btn btn-primary m-2" electronView (click)="fullScreen(false)">Normal Screen</button>
-<br>
-<button class="btn btn-primary m-2" (click)="testHttp()">Test HTTP</button>
-<pre>{{testData | json}}</pre>
-<br>
-<button class="btn btn-primary m-2" (click)="localStorageSet()">Test local storage setItem</button>
-<button class="btn btn-primary m-2" (click)="localStorageGet()">Test local storage getItem</button>
-<pre>{{localStorageItem | json}}</pre>
-<br>
-<fa-icon [icon]="faCoffee"></fa-icon>
+<div class="navigation">
+    <div class="navigation-buttons">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn btn-secondary">File</button>
+
+            <button type="button" class="btn btn-secondary">Edit</button>
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="#">Dropdown link</a>
+                    <a class="dropdown-item" href="#">Dropdown link</a>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-secondary">View</button>
+
+            <button type="button" class="btn btn-secondary">Help</button>
+
+        </div>
+    </div>
+    <div class="window-buttons" electronView>
+        <button (click)="minimize()">
+            <fa-icon [icon]="faWindowMinimize"></fa-icon>
+        </button>
+        <button (click)="toggle()">
+            <fa-icon [icon]="faWindowMaximize"></fa-icon>
+        </button>
+        <button (click)="close()" class="close-btn">
+            <fa-icon [icon]="faTimes"></fa-icon>
+        </button>
+    </div>
+</div>
+<div class="main">
+
+    <div class="content">
+        <router-outlet></router-outlet>
+        <button class="btn btn-primary m-2" electronView (click)="fullScreen(true)">Full Screen</button>
+        <button class="btn btn-primary m-2" electronView (click)="fullScreen(false)">Normal Screen</button>
+        <br>
+        <button class="btn btn-primary m-2" (click)="testHttp()">Test HTTP</button>
+        <pre>{{testData | json}}</pre>
+        <br>
+        <button class="btn btn-primary m-2" (click)="localStorageSet()">Test local storage setItem</button>
+        <button class="btn btn-primary m-2" (click)="localStorageGet()">Test local storage getItem</button>
+        <pre>{{localStorageItem | json}}</pre>
+        <br>
+        <fa-icon [icon]="faCoffee"></fa-icon>
+
+    </div>
+</div>

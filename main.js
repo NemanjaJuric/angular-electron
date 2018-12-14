@@ -14,9 +14,11 @@ function createWindow() {
         y: size.height * 0.05,
         width: size.width * 0.8,
         height: size.height * 0.9,
+        transparent: true,
+        frame: false,
     };
     win = new electron_1.BrowserWindow(browserOptions);
-    win.setMenu(null);
+    // win.setMenu(null);
     if (serve) {
         require('electron-reload')(__dirname, {
             electron: require(__dirname + "/node_modules/electron")
@@ -63,6 +65,20 @@ catch (e) {
 }
 electron_1.ipcMain.on('full-screen', function (event, arg) {
     win.setFullScreen(arg);
+});
+electron_1.ipcMain.on('toggle', function (event, arg) {
+    if (arg) {
+        win.maximize();
+    }
+    else {
+        win.unmaximize();
+    }
+});
+electron_1.ipcMain.on('minimize', function (event, arg) {
+    win.minimize();
+});
+electron_1.ipcMain.on('close', function (event, arg) {
+    win.close();
 });
 electron_1.ipcMain.on('progress', function (event, args) {
     win.setProgressBar(args);
