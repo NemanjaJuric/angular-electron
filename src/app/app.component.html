@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div class="navigation">
     <div class="navigation-buttons">
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -41,6 +40,7 @@
         <button class="btn btn-primary m-2" electronView (click)="fullScreen(false)">Normal Screen</button>
         <br>
         <button class="btn btn-primary m-2" (click)="testHttp()">Test HTTP</button>
+        <button class="btn btn-primary m-2" (click)="testHttpElectron()">Test HTTP Electron</button>
         <pre>{{testData | json}}</pre>
         <br>
         <button class="btn btn-primary m-2" (click)="localStorageSet()">Test local storage setItem</button>
@@ -51,18 +51,3 @@
 
     </div>
 </div>
-=======
-<router-outlet></router-outlet>
-<button class="btn btn-primary m-2" electronView (click)="fullScreen(true)">Full Screen</button>
-<button class="btn btn-primary m-2" electronView (click)="fullScreen(false)">Normal Screen</button>
-<br>
-<button class="btn btn-primary m-2" (click)="testHttp()">Test HTTP</button>
-<pre>{{testData | json}}</pre>
-<br>
-<button class="btn btn-primary m-2" (click)="localStorageSet()">Test local storage setItem</button>
-<button class="btn btn-primary m-2" (click)="localStorageGet()">Test local storage getItem</button>
-<pre>{{localStorageItem | json}}</pre>
-<br>
-<fa-icon [icon]="faCoffee"></fa-icon>
-<br>
->>>>>>> c1081fddf7fe0149f9959e58d4ea514c695f8a49

@@ -43,12 +43,16 @@ export class AppComponent {
   }
 
   testData: any;
-
+  // http://localhost:5000/api/first/test
   testHttp() {
-    this._webApiService.get('assets/data/data.json')
+    this._webApiService.get('http://localhost:5000/api/first/test', null, 'text')
       .subscribe(res => {
         this.testData = res;
       })
+  }
+
+  testHttpElectron(){
+    this._electronService.ipcRenderer.send('get');
   }
 
   localStorageSet() {

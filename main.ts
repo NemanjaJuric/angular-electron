@@ -1,6 +1,7 @@
-import { app, BrowserWindow, screen, ipcMain, BrowserWindowConstructorOptions, Notification } from 'electron';
+import { app, BrowserWindow, screen, ipcMain, BrowserWindowConstructorOptions, net } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+import fetch from 'electron-fetch';
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
@@ -17,7 +18,7 @@ function createWindow() {
     y: size.height * 0.05,
     width: size.width * 0.8,
     height: size.height * 0.9,
-    transparent: true,
+    // transparent: true,
     frame: false,
   }
 
@@ -99,4 +100,12 @@ ipcMain.on('close', (event, arg) => {
 
 ipcMain.on('progress', (event, args) => {
   win.setProgressBar(args)
+})
+
+ipcMain.on('get', (event, args) => {
+  
+  fetch('http://localhost:5000/api/first/test')
+    .then(res => res.text())
+    .then(body => console.log(body))
+
 })

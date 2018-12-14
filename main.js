@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
 var path = require("path");
 var url = require("url");
+var electron_fetch_1 = require("electron-fetch");
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 var win;
 var args = process.argv.slice(1);
@@ -14,20 +15,11 @@ function createWindow() {
         y: size.height * 0.05,
         width: size.width * 0.8,
         height: size.height * 0.9,
-<<<<<<< HEAD
-        transparent: true,
+        // transparent: true,
         frame: false,
     };
     win = new electron_1.BrowserWindow(browserOptions);
-    // win.setMenu(null);
-=======
-        webPreferences: {
-            webSecurity: false
-        }
-    };
-    win = new electron_1.BrowserWindow(browserOptions);
-    win.maximize();
->>>>>>> c1081fddf7fe0149f9959e58d4ea514c695f8a49
+    // win.setMenu(null); // for production
     if (serve) {
         require('electron-reload')(__dirname, {
             electron: require(__dirname + "/node_modules/electron")
@@ -93,5 +85,10 @@ electron_1.ipcMain.on('close', function (event, arg) {
 });
 electron_1.ipcMain.on('progress', function (event, args) {
     win.setProgressBar(args);
+});
+electron_1.ipcMain.on('get', function (event, args) {
+    electron_fetch_1.default('http://localhost:5000/api/first/test')
+        .then(function (res) { return res.text(); })
+        .then(function (body) { return console.log(body); });
 });
 //# sourceMappingURL=main.js.map
