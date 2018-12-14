@@ -14,11 +14,20 @@ function createWindow() {
         y: size.height * 0.05,
         width: size.width * 0.8,
         height: size.height * 0.9,
+<<<<<<< HEAD
         transparent: true,
         frame: false,
     };
     win = new electron_1.BrowserWindow(browserOptions);
     // win.setMenu(null);
+=======
+        webPreferences: {
+            webSecurity: false
+        }
+    };
+    win = new electron_1.BrowserWindow(browserOptions);
+    win.maximize();
+>>>>>>> c1081fddf7fe0149f9959e58d4ea514c695f8a49
     if (serve) {
         require('electron-reload')(__dirname, {
             electron: require(__dirname + "/node_modules/electron")
@@ -43,7 +52,9 @@ try {
     // This method will be called when Electron has finished
     // initialization and is ready to create browser windows.
     // Some APIs can only be used after this event occurs.
-    electron_1.app.on('ready', createWindow);
+    electron_1.app.on('ready', function () {
+        createWindow();
+    });
     // Quit when all windows are closed.
     electron_1.app.on('window-all-closed', function () {
         // On OS X it is common for applications and their menu bar
