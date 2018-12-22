@@ -41,5 +41,5 @@ testem.log
 Thumbs.db
 
 # Other
-source/**/*.js
-source/**/*.js.map
+/source/**/*.js
+/source/**/*.js.map
