@@ -1,5 +1,4 @@
-import { BrowserWindow } from "electron";
-import { BrowserOptions } from "./browser-options";
+import { BrowserWindow, BrowserWindowConstructorOptions, screen } from "electron";
 import * as path from 'path';
 import * as url from 'url';
 
@@ -15,7 +14,18 @@ export class WindowBuilder {
 
     buildWindow() {
 
-        win = new BrowserWindow(BrowserOptions.options);
+        var size = screen.getPrimaryDisplay().workAreaSize;
+
+        let browserOptions: BrowserWindowConstructorOptions = {
+            x: size.width * 0.1,
+            y: size.height * 0.05,
+            width: size.width * 0.8,
+            height: size.height * 0.9,
+            transparent: true,
+            frame: false,
+        }
+
+        win = new BrowserWindow(browserOptions);
         win.setMenu(null);
 
         if (this._serve) {
