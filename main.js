@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var application_builder_1 = require("./source/core/application-builder");
-var startup_1 = require("./source/core/startup");
+var application_builder_1 = require("./source/app/core/application-builder");
+var startup_1 = require("./source/app/core/startup");
 var Main = /** @class */ (function () {
     function Main() {
     }

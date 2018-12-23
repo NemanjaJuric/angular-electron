@@ -12,7 +12,7 @@ export class WindowBuilder {
 
     private _serve: boolean;
 
-    buildWindow() {
+    createWindow() {
 
         var size = screen.getPrimaryDisplay().workAreaSize;
 
@@ -26,19 +26,19 @@ export class WindowBuilder {
         }
 
         win = new BrowserWindow(browserOptions);
-        win.setMenu(null);
 
         if (this._serve) {
             require('electron-reload')(__dirname, {
-                electron: require(path.join(__dirname, '../../node_modules/electron'))
+                electron: require(path.join(__dirname, '../../../node_modules/electron'))
             });
             win.loadURL('http://localhost:4200');
         } else {
             win.loadURL(url.format({
-                pathname: path.join(__dirname, '../../dist/index.html'),
+                pathname: path.join(__dirname, '../../../dist/index.html'),
                 protocol: 'file:',
                 slashes: true
             }));
+            win.setMenu(null);
         }
 
         win.on('closed', () => {

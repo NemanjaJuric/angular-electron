@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { ElectronService } from './services/electron.service';
 import { ElectronViewDirective } from './directives/electron-view.directive';
 import { WebApiService } from './services/web-api.service';
-import { LocalStorageService } from './services/local-storage.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -29,7 +28,6 @@ import { WebviewDirective } from './directives/webview.directive';
   providers: [
     ElectronService,
     WebApiService,
-    LocalStorageService
   ],
   bootstrap: [AppComponent]
 })

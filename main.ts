@@ -1,5 +1,5 @@
-import { ApplicationBuilder } from './source/core/application-builder';
-import { Startup } from './source/core/startup';
+import { ApplicationBuilder } from './source/app/core/application-builder';
+import { Startup } from './source/app/core/startup';
 
 class Main {
 

@@ -1,5 +1,6 @@
-import { ipcMain } from 'electron';
+import { ipcMain, Notification } from 'electron';
 import { win } from '../core/window-builder';
+const notifier = require('node-notifier');
 
 export class IpcListener {
 
@@ -28,6 +29,14 @@ export class IpcListener {
     ipcMain.on('progress', (event, args) => {
       win.setProgressBar(args)
     })
+
+    ipcMain.on('notification', (event, args) => {
+      notifier.notify({
+        title: 'Notification',
+        message: 'Notification test'
+      });
+    })
+
   }
 
 }

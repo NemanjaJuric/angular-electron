@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders, HttpRequest, HttpEventType } from '@angular/common/http';
-import { catchError, tap, map } from 'rxjs/operators';
+import { HttpClient, HttpParams, HttpErrorResponse, HttpRequest, HttpEventType } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { ElectronService } from './electron.service';
 

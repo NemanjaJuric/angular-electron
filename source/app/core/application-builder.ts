@@ -13,7 +13,7 @@ export class ApplicationBuilder {
     build() {
         try {
             app.on('ready', () => {
-                this._windowBuilder.buildWindow();
+                this._windowBuilder.createWindow();
             });
             app.on('window-all-closed', () => {
                 if (process.platform !== 'darwin') {
@@ -22,7 +22,7 @@ export class ApplicationBuilder {
             });
             app.on('activate', () => {
                 if (win === null) {
-                    this._windowBuilder.buildWindow();
+                    this._windowBuilder.createWindow();
                 }
             });
         } catch (e) {
