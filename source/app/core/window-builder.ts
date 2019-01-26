@@ -20,6 +20,7 @@ export class WindowBuilder {
             y: size.height * 0.05,
             width: size.width * 0.8,
             height: size.height * 0.9,
+            show: false
         }
 
         win = new BrowserWindow(browserOptions);
@@ -37,6 +38,10 @@ export class WindowBuilder {
             }));
             win.setMenu(null);
         }
+
+        win.once('ready-to-show', () => {
+            win.show()
+          })
 
         win.on('closed', () => {
             win = null;
