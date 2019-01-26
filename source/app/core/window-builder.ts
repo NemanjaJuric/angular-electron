@@ -1,4 +1,4 @@
-import { BrowserWindow, BrowserWindowConstructorOptions, screen } from "electron";
+import { BrowserWindow, BrowserWindowConstructorOptions, screen, Tray, Menu, app } from "electron";
 import * as path from 'path';
 import * as url from 'url';
 
@@ -6,14 +6,13 @@ export var win: BrowserWindow = null;
 
 export class WindowBuilder {
 
-    constructor(serve: boolean){
+    constructor(serve: boolean) {
         this._serve = serve;
     }
 
     private _serve: boolean;
 
     createWindow() {
-
         var size = screen.getPrimaryDisplay().workAreaSize;
 
         let browserOptions: BrowserWindowConstructorOptions = {
@@ -21,8 +20,6 @@ export class WindowBuilder {
             y: size.height * 0.05,
             width: size.width * 0.8,
             height: size.height * 0.9,
-            transparent: true,
-            frame: false,
         }
 
         win = new BrowserWindow(browserOptions);
@@ -46,7 +43,36 @@ export class WindowBuilder {
         });
 
         return win;
+    }
 
+    useSystemTray() {
+        win.on('minimize', function (event) {
+            event.preventDefault()
+            win.hide()
+        })
+
+        win.on('show', function () {
+            appIcon.setHighlightMode('always')
+        })
+
+        var iconpath = path.join(__dirname, '../../../dist/favicon.ico')
+        var appIcon = new Tray(iconpath)
+        var contextMenu = Menu.buildFromTemplate([
+            {
+                label: 'Show App', click: function () {
+                    win.show()
+                }
+            },
+            {
+                label: 'Quit', click: function () {
+                    app.quit()
+                }
+            }
+        ])
+        appIcon.setContextMenu(contextMenu);
+        appIcon.on('click', function () {
+            win.show();
+        })
     }
 
 }

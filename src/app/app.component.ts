@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ElectronService } from './services/electron.service';
 import { faTimes, faWindowMaximize, faWindowMinimize } from '@fortawesome/free-solid-svg-icons';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ export class AppComponent {
 
   constructor(
     private _electronService: ElectronService,
+    private _http: HttpClient
   ) { }
 
   faTimes = faTimes;
@@ -18,7 +20,14 @@ export class AppComponent {
 
   fullScreenInd: boolean = false;
 
-  notification(){
+  test() {
+    this._http.get('http://localhost:8080/api/first/test')
+      .subscribe(res => {
+        console.log(res)
+      })
+  }
+
+  notification() {
     this._electronService.ipcRenderer.send('notification')
   }
 
@@ -26,18 +35,18 @@ export class AppComponent {
     this._electronService.ipcRenderer.send('full-screen', flag)
   }
 
-  toggle(){
+  toggle() {
     this.fullScreenInd = !this.fullScreenInd;
     this._electronService.ipcRenderer.send('toggle', this.fullScreenInd)
   }
 
-  minimize(){
+  minimize() {
     this._electronService.ipcRenderer.send('minimize');
   }
 
-  close(){
+  close() {
     this._electronService.ipcRenderer.send('close');
   }
 
-  
+
 }

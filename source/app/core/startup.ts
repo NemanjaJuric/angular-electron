@@ -7,8 +7,9 @@ export class Startup {
         this.configure(applicationBuilder)
     }
 
-    configure(app: ApplicationBuilder) {
-        app.use(() => IpcListener.start());
+    configure(appBuilder: ApplicationBuilder) {
+        appBuilder.use(() => appBuilder.useSystemTray());
+        appBuilder.use(() => IpcListener.start());
     }
 
 }
